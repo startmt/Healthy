@@ -1,15 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="20dp"
     android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:drawableLeft="@drawable/ic_action_user"
+                android:hint="@string/user_id"
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
+                />
+            <EditText
+                android:drawableLeft="@drawable/ic_action_person"
+                android:hint="@string/name"
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
+                />
+            <EditText
+                android:drawableLeft="@drawable/ic_action_date"
+                android:hint="@string/age"
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
+                />
+            <EditText
+                android:drawableLeft="@drawable/ic_action_name"
+                android:inputType="textPassword"
+                android:hint="@string/password"
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
+                />
+
+            <Button
+                android:text="Register New Account"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/button" />
+
+        </LinearLayout>
     </ScrollView>
+
 </LinearLayout>

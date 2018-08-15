@@ -3,7 +3,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:padding="20dp"
     android:layout_height="match_parent">
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -13,46 +12,37 @@
             android:orientation="vertical"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="299dp"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/fb"
-                android:layout_gravity="center"
-                />
             <EditText
-                android:drawableLeft="@drawable/ic_action_user"
-                android:hint="@string/user_id"
+                android:drawableLeft="@drawable/ic_action_height"
+                android:hint="@string/height"
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"
                 android:layout_height="wrap_content"
                 />
             <EditText
-                android:drawableLeft="@drawable/ic_action_name"
+                android:drawableLeft="@drawable/ic_action_weight"
                 android:inputType="textPassword"
-                android:hint="@string/password"
+                android:hint="@string/weight"
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"
                 android:layout_height="wrap_content"
                 />
 
             <Button
-                android:text="Login"
+                android:text="Calculate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/button" />
 
-            <TextView
-                android:textColor="#0000EE"
-                android:text="Register New Account"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:id="@+id/textView2" />
-
-
         </LinearLayout>
-</ScrollView>
+    </ScrollView>
+
+    <TextView
+        android:text="Your BMI"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:id="@+id/textView" />
 
 </LinearLayout>
