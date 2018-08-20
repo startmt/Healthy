@@ -18,10 +18,11 @@
                 android:layout_width="299dp"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/fb"
+                android:src="@drawable/healthy"
                 android:layout_gravity="center"
                 />
             <EditText
+                android:id="@+id/login_user_id"
                 android:drawableLeft="@drawable/ic_action_user"
                 android:hint="@string/user_id"
                 android:layout_width="match_parent"
@@ -29,6 +30,7 @@
                 android:layout_height="wrap_content"
                 />
             <EditText
+                android:id="@+id/login_user_password"
                 android:drawableLeft="@drawable/ic_action_name"
                 android:inputType="textPassword"
                 android:hint="@string/password"
@@ -41,7 +43,7 @@
                 android:text="Login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/button" />
+                android:id="@+id/button_login" />
 
             <TextView
                 android:textColor="#0000EE"
@@ -49,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:id="@+id/textView2" />
+                android:id="@+id/text_register" />
 
 
         </LinearLayout>
