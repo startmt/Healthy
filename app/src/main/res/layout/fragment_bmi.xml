@@ -24,7 +24,6 @@
             <EditText
                 android:id="@+id/bmi_user_weight"
                 android:drawableLeft="@drawable/ic_action_weight"
-                android:inputType="textPassword"
                 android:hint="@string/weight"
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"
@@ -36,16 +35,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/button_calculate" />
+            <TextView
+                android:text="Your BMI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="30dp"
+                android:id="@+id/textView" />
 
+            <TextView
+                android:textSize="20dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2" />
         </LinearLayout>
     </ScrollView>
 
-    <TextView
-        android:text="Your BMI"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="30dp"
-        android:id="@+id/textView" />
+
 
 </LinearLayout>
