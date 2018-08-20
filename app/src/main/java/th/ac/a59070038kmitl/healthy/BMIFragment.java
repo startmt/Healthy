@@ -42,7 +42,7 @@ public class BMIFragment extends android.support.v4.app.Fragment{
                 if(userHeight.isEmpty() || userWeight.isEmpty() || userHeight.equals("0") || userWeight.equals("0")){
                     Log.d("BMI", "FIELD NAME IS EMPTY");
                     Toast.makeText(getActivity(), "กรุณาระบุข้อมูลให้ครบถ้วน", Toast.LENGTH_LONG).show();
-                    ((TextView) getView().findViewById(R.id.textView2)).setText("");
+                    ((TextView) getView().findViewById(R.id.textView2)).setText("Error!!");
                 }
                 else {
                     Log.d("BMI", "BMI IS VALUE");
