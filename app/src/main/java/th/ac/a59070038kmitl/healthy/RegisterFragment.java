@@ -27,18 +27,18 @@ public class RegisterFragment extends Fragment {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String userId =  ((EditText)getView().findViewById(R.id.login_user_id)).getText().toString();
-                String password =  ((EditText)getView().findViewById(R.id.login_user_password)).getText().toString();
+                String userId =  ((EditText)getView().findViewById(R.id.regis_user_id)).getText().toString();
+                String password =  ((EditText)getView().findViewById(R.id.regis_user_password)).getText().toString();
                 String userAge = ((EditText)getView().findViewById(R.id.regis_user_age)).getText().toString();
                 String userName = ((EditText)getView().findViewById(R.id.regis_user_name)).getText().toString();
 
                 if(userId.isEmpty() || password.isEmpty() || userAge.isEmpty() || userName.isEmpty()){
                     Log.d("REGISTER", "FIELD NAME IS EMPTY");
-                    Toast.makeText(getActivity(),"กรุณากรอกข้อมูลให้ครบถ้วน",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(),"กรุณากรอกข้อมูลให้ครบถ้วน",Toast.LENGTH_SHORT).show();
                 }
                 else if (userId.equals("admin")){
                     Log.d("REGISTER", "USER ALREADY EXIST");
-                    Toast.makeText(getActivity(), "User นี้มีอยู่ในระบบแล้ว", Toast.LENGTH_LONG);
+                    Toast.makeText(getActivity(), "User นี้มีอยู่ในระบบแล้ว", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     Log.d("REGISTER", "GOTO BMI");

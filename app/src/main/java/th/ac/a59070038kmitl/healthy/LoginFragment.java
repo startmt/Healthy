@@ -43,6 +43,7 @@ public class LoginFragment extends Fragment {
 
         Button loginBtn = (Button) getView().findViewById(R.id.button_login);
         loginBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
             public void onClick(View view){
 
                 String userId =  ((EditText)getView().findViewById(R.id.login_user_id)).getText().toString();
