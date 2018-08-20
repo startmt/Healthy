@@ -35,7 +35,8 @@ public class LoginFragment extends Fragment {
         TextView regisTv = (TextView) getView().findViewById(R.id.text_register);
         regisTv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
-
+                Log.d("LOGIN", "GOTO REGISTER");
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new RegisterFragment()).commit();
             }
         });
 
@@ -43,16 +44,25 @@ public class LoginFragment extends Fragment {
         Button loginBtn = (Button) getView().findViewById(R.id.button_login);
         loginBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                Log.d("LOGIN", "GGG");
+
                 String userId =  ((EditText)getView().findViewById(R.id.login_user_id)).getText().toString();
                 String password =  ((EditText)getView().findViewById(R.id.login_user_password)).getText().toString();
                 if(userId.isEmpty() || password.isEmpty()){
+                    Log.d("LOGIN", "USER OR PASSWORD IS EMPTY");
+
                     Toast.makeText(
-                        getActivity(),"user or password", Toast.LENGTH_SHORT
+                        getActivity(),"กรุณาใส่ user or password", Toast.LENGTH_SHORT
                     ).show();
                 }
                 else if(userId.equals("admin") && password.equals("admin")){
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new BMIFragment());
+                    Log.d("LOGIN", "GOTO BMI");
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new BMIFragment()).commit();
+                }
+                else{
+                    Log.d("LOGIN", "INVALID USER OR PASSWORD");
+                    Toast.makeText(
+                            getActivity()," user or password Invalid", Toast.LENGTH_SHORT
+                    ).show();
                 }
 
             }
