@@ -18,13 +18,14 @@
                 android:layout_width="299dp"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/healthy"
+                android:src="@drawable/healthy_img"
                 android:layout_gravity="center"
                 />
             <EditText
                 android:id="@+id/login_user_id"
                 android:drawableLeft="@drawable/ic_action_user"
                 android:hint="@string/user_id"
+                android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"
                 android:layout_height="wrap_content"

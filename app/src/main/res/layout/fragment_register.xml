@@ -15,6 +15,7 @@
 
             <EditText
                 android:drawableLeft="@drawable/ic_action_user"
+                android:inputType="text"
                 android:id="@+id/regis_user_id"
                 android:hint="@string/user_id"
                 android:layout_width="match_parent"
@@ -24,6 +25,7 @@
             <EditText
                 android:drawableLeft="@drawable/ic_action_person"
                 android:id="@+id/regis_user_name"
+                android:inputType="text"
                 android:hint="@string/name"
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"
@@ -32,6 +34,7 @@
             <EditText
                 android:drawableLeft="@drawable/ic_action_date"
                 android:id="@+id/regis_user_age"
+                android:inputType="text"
                 android:hint="@string/age"
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"

@@ -16,6 +16,7 @@
             <EditText
                 android:drawableLeft="@drawable/ic_action_height"
                 android:id="@+id/bmi_user_height"
+                android:inputType="number"
                 android:hint="@string/height"
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"
@@ -23,6 +24,7 @@
                 />
             <EditText
                 android:id="@+id/bmi_user_weight"
+                android:inputType="number"
                 android:drawableLeft="@drawable/ic_action_weight"
                 android:hint="@string/weight"
                 android:layout_width="match_parent"
