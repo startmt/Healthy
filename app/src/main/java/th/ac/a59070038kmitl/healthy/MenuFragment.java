@@ -19,11 +19,16 @@ import java.util.ArrayList;
 
 public class MenuFragment extends Fragment{
     ArrayList<String> menu = new ArrayList<>();
+
+
     public MenuFragment(){
         menu.add("BMI");
-        menu.add("Register");
+        menu.add("Weight");
+        menu.add("Setup");
         menu.add("Logout");
     }
+
+
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
@@ -52,9 +57,9 @@ public class MenuFragment extends Fragment{
 
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.main_view, new RegisterFragment()).addToBackStack(null).commit();
+                            .replace(R.id.main_view, new WeightFragment()).addToBackStack(null).commit();
                 }
-                else if(position == 2){
+                else if(position == 3){
 
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()
