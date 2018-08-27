@@ -57,7 +57,7 @@ public class LoginFragment extends Fragment {
                 }
                 else if(userId.equals("admin") && password.equals("admin")){
                     Log.d("LOGIN", "GOTO BMI");
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new BMIFragment()).commit();
+                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).commit();
                 }
                 else{
                     Log.d("LOGIN", "INVALID USER OR PASSWORD");
