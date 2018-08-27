@@ -6,8 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -22,7 +20,7 @@ import th.ac.a59070038kmitl.healthy.menu.WeightAdapter;
 
 public class WeightFragment extends Fragment{
 
-    ArrayList<WeightAdapter> weightArray = new ArrayList<WeightAdapter>();
+    ArrayList<Weight> weightArray = new ArrayList<>();
 
     public WeightFragment(){
 
@@ -34,13 +32,21 @@ public class WeightFragment extends Fragment{
 
         weightArray.add(new Weight("01 Jan 2018", 63, "UP"));
 
-        Button addWeightButton = (Button) getView().findViewById(R.id.button_add);
-        addWeightButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new WeightFormFragment()).commit();
-            }
-        });
+
+        ListView weightList = (ListView) getView().findViewById(R.id.weight_list);
+        WeightAdapter weightAdapter = new WeightAdapter(
+                getActivity(),
+                R.layout.fragment_weigth_item,
+                weightArray
+        );
+        weightList.setAdapter(weightAdapter);
+//        Button addWeightButton = (Button) getView().findViewById(R.id.button_add);
+//        addWeightButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new WeightFormFragment()).commit();
+//            }
+//        });
 
     }
 
