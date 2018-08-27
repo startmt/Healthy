@@ -20,7 +20,7 @@ import th.ac.a59070038kmitl.healthy.menu.WeightAdapter;
 
 public class WeightFragment extends Fragment{
 
-    ArrayList<Weight> weightArray = new ArrayList<>();
+    ArrayList<Weight> weight = new ArrayList<Weight>();
 
     public WeightFragment(){
 
@@ -30,23 +30,27 @@ public class WeightFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        weightArray.add(new Weight("01 Jan 2018", 63, "UP"));
+        weight.add(new Weight("01 Jan 2018", 63, "UP"));
 
 
         ListView weightList = (ListView) getView().findViewById(R.id.weight_list);
         WeightAdapter weightAdapter = new WeightAdapter(
                 getActivity(),
                 R.layout.fragment_weigth_item,
-                weightArray
+                weight
         );
+
         weightList.setAdapter(weightAdapter);
-//        Button addWeightButton = (Button) getView().findViewById(R.id.button_add);
-//        addWeightButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new WeightFormFragment()).commit();
-//            }
-//        });
+
+
+
+        Button addWeightButton = (Button) getView().findViewById(R.id.button_add);
+        addWeightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new WeightFormFragment()).commit();
+            }
+        });
 
     }
 

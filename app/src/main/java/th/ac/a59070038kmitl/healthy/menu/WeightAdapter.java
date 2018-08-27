@@ -2,7 +2,7 @@ package th.ac.a59070038kmitl.healthy.menu;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,9 +41,11 @@ public class WeightAdapter extends ArrayAdapter<Weight>{
         TextView weight = (TextView) weightItem.findViewById(R.id.weight_item_weight);
 
         Weight row = weights.get(position);
+        Log.d("WEIGHTAD", row.getDate());
+        Log.d("WEIGHTAD", String.valueOf(row.getWeight()));
+        Log.d("WEIGHTAD", row.getStatus());
         date.setText(row.getDate());
-        weight.setText(row.getWeight());
-
+        weight.setText(String.valueOf(row.getWeight()));
 
         return weightItem;
     }
