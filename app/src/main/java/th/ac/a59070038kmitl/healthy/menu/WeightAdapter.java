@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import th.ac.a59070038kmitl.healthy.R;
@@ -31,7 +32,7 @@ public class WeightAdapter extends ArrayAdapter<Weight>{
     @NonNull
     public View getView(int position, @NonNull View convertView,
                        @NonNull ViewGroup parent){
-
+        Collections.reverse(weights);
         View weightItem = LayoutInflater.from(context).inflate(
                 R.layout.fragment_weigth_item,
                 parent,
@@ -39,13 +40,17 @@ public class WeightAdapter extends ArrayAdapter<Weight>{
 
         TextView date = (TextView) weightItem.findViewById(R.id.weight_item_date);
         TextView weight = (TextView) weightItem.findViewById(R.id.weight_item_weight);
+        TextView status = (TextView) weightItem.findViewById(R.id.weight_item_status);
 
         Weight row = weights.get(position);
+
+        Log.d("WEIGHTAD", String.valueOf(position));
         Log.d("WEIGHTAD", row.getDate());
         Log.d("WEIGHTAD", String.valueOf(row.getWeight()));
         Log.d("WEIGHTAD", row.getStatus());
         date.setText(row.getDate());
         weight.setText(String.valueOf(row.getWeight()));
+        status.setText(row.getStatus());
 
         return weightItem;
     }

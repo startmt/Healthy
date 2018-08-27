@@ -31,6 +31,8 @@ public class WeightFragment extends Fragment{
         super.onActivityCreated(savedInstanceState);
 
         weight.add(new Weight("01 Jan 2018", 63, "UP"));
+        weight.add(new Weight("02 Jan 2018", 64, "UP"));
+        weight.add(new Weight("03 Jan 2018", 62, "DOWN"));
 
 
         ListView weightList = (ListView) getView().findViewById(R.id.weight_list);
@@ -48,7 +50,7 @@ public class WeightFragment extends Fragment{
         addWeightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new WeightFormFragment()).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new WeightFormFragment()).addToBackStack(null).commit();
             }
         });
 
