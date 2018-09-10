@@ -16,26 +16,8 @@
             <EditText
                 android:drawableLeft="@drawable/ic_action_user"
                 android:inputType="text"
-                android:id="@+id/regis_user_id"
-                android:hint="@string/user_id"
-                android:layout_width="match_parent"
-                android:layout_marginTop="15dp"
-                android:layout_height="wrap_content"
-                />
-            <EditText
-                android:drawableLeft="@drawable/ic_action_person"
-                android:id="@+id/regis_user_name"
-                android:inputType="text"
-                android:hint="@string/name"
-                android:layout_width="match_parent"
-                android:layout_marginTop="15dp"
-                android:layout_height="wrap_content"
-                />
-            <EditText
-                android:drawableLeft="@drawable/ic_action_date"
-                android:id="@+id/regis_user_age"
-                android:inputType="number"
-                android:hint="@string/age"
+                android:id="@+id/regis_user_email"
+                android:hint="@string/user_email"
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"
                 android:layout_height="wrap_content"
@@ -45,6 +27,15 @@
                 android:id="@+id/regis_user_password"
                 android:inputType="textPassword"
                 android:hint="@string/password"
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
+                />
+            <EditText
+                android:drawableLeft="@drawable/ic_action_name"
+                android:inputType="textPassword"
+                android:id="@+id/regis_user_repassword"
+                android:hint="@string/re_password"
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"
                 android:layout_height="wrap_content"

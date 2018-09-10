@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
         //setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_main);
         if(savedInstanceState == null){
-            MenuFragment fragment = new MenuFragment();
+            LoginFragment fragment = new LoginFragment();
 
             getSupportFragmentManager()
                     .beginTransaction()
@@ -21,3 +21,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+    
