@@ -14,6 +14,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 /**
  * Created by LAB203_15 on 20/8/2561.
  */
@@ -39,32 +45,35 @@ public class LoginFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new RegisterFragment()).commit();
             }
         });
-
+        final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
         Button loginBtn = (Button) getView().findViewById(R.id.button_login);
         loginBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
 
-                String userId =  ((EditText)getView().findViewById(R.id.login_user_id)).getText().toString();
+                String email =  ((EditText)getView().findViewById(R.id.login_user_email)).getText().toString();
                 String password =  ((EditText)getView().findViewById(R.id.login_user_password)).getText().toString();
-                if(userId.isEmpty() || password.isEmpty()){
-                    Log.d("LOGIN", "USER OR PASSWORD IS EMPTY");
 
-                    Toast.makeText(
-                        getActivity(),"กรุณาใส่ user or password", Toast.LENGTH_SHORT
-                    ).show();
-                }
-                else if(userId.equals("admin") && password.equals("admin")){
-                    Log.d("LOGIN", "GOTO BMI");
-                    getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).commit();
-                }
-                else{
-                    Log.d("LOGIN", "INVALID USER OR PASSWORD");
-                    Toast.makeText(
-                            getActivity()," user or password Invalid", Toast.LENGTH_SHORT
-                    ).show();
-                }
+                mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        FirebaseUser _user = authResult.getUser();
+                        if(!_user.isEmailVerified()){
+                            Toast.makeText(getActivity(),"กรุณายืนยัน Email", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new BMIFragment()).commit();
+                            Log.d("LOGIN", "GO TO BMI");
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("LOGIN", e.getMessage());
+                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             }
         });
