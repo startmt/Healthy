@@ -1,6 +1,7 @@
 package th.ac.a59070038kmitl.healthy;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,8 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.lang.annotation.Documented;
 import java.util.ArrayList;
@@ -35,8 +39,18 @@ public class WeightFragment extends Fragment{
         super.onActivityCreated(savedInstanceState);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser mUser = mAuth.getCurrentUser();
+        FirebaseFirestore mdb =FirebaseFirestore.getInstance();
+        mdb.collection("collection").document("document").set("data").addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
 
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
 
+            }
+        });
 
         weight.add(new Weight("01 Jan 2018", 63, "UP"));
         weight.add(new Weight("02 Jan 2018", 64, "UP"));

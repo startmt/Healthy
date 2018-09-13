@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "406978012373",
+    "firebase_url": "https://healthykmitl.firebaseio.com",
+    "project_id": "healthykmitl",
+    "storage_bucket": "healthykmitl.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:406978012373:android:cbbebc160e1181d8",
+        "android_client_info": {
+          "package_name": "th.ac.a59070038kmitl.healthy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "406978012373-tcn62kfhv5oodufl6ao4bqssgvbbu9b5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "th.ac.a59070038kmitl.healthy",
+            "certificate_hash": "49e545c5ce8c1ac08a6f878bff2f54a41bb4143e"
+          }
+        },
+        {
+          "client_id": "406978012373-455fhl94asvg81qu1lvup367s4n5tr69.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "th.ac.a59070038kmitl.healthy",
+            "certificate_hash": "5acd4aaf98d826b927b232859a91e07b9253964b"
+          }
+        },
+        {
+          "client_id": "406978012373-6cd0qnvod03n696f461hf40iq4jb15ds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4POU7iwd7QHkGZB2HaDMS7rnMzS9qoO8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "406978012373-6cd0qnvod03n696f461hf40iq4jb15ds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
