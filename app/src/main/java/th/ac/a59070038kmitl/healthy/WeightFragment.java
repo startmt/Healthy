@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.lang.annotation.Documented;
 import java.util.ArrayList;
 
 import th.ac.a59070038kmitl.healthy.menu.Weight;
@@ -29,6 +33,10 @@ public class WeightFragment extends Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser mUser = mAuth.getCurrentUser();
+
+
 
         weight.add(new Weight("01 Jan 2018", 63, "UP"));
         weight.add(new Weight("02 Jan 2018", 64, "UP"));

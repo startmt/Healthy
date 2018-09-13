@@ -11,6 +11,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 
 /**
@@ -38,7 +41,9 @@ public class MenuFragment extends Fragment{
                 android.R.layout.simple_list_item_1,
                 menu
         );
-
+        final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser muUser = mAuth.getCurrentUser();
+        Log.d("MENU", muUser.getEmail());
         ListView menulist = (ListView) getView().findViewById(R.id.menu_list);
         menulist.setAdapter(menuAdapter);
         menulist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -60,7 +65,7 @@ public class MenuFragment extends Fragment{
                             .replace(R.id.main_view, new WeightFragment()).addToBackStack(null).commit();
                 }
                 else if(position == 3){
-
+                    mAuth.signOut();
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.main_view, new LoginFragment()).addToBackStack(null).commit();

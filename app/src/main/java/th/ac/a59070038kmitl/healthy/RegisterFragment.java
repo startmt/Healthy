@@ -64,7 +64,7 @@ public class RegisterFragment extends Fragment {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Log.d("REGISTER", e.getMessage());
-                            Toast.makeText(getActivity(), "กรุณากรอก Email ให้ถูกต้อง", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

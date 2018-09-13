@@ -37,7 +37,6 @@ public class LoginFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         TextView regisTv = (TextView) getView().findViewById(R.id.text_register);
         regisTv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
@@ -46,35 +45,43 @@ public class LoginFragment extends Fragment {
             }
         });
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser muUser = mAuth.getCurrentUser();
+        if(muUser != null){
+            Log.d("LOGIN", muUser.getEmail());
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).commit();
+            Log.d("LOGIN", "GO TO BMI");
+        }
 
         Button loginBtn = (Button) getView().findViewById(R.id.button_login);
         loginBtn.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
 
-                String email =  ((EditText)getView().findViewById(R.id.login_user_email)).getText().toString();
-                String password =  ((EditText)getView().findViewById(R.id.login_user_password)).getText().toString();
-
-                mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        FirebaseUser _user = authResult.getUser();
-                        if(!_user.isEmailVerified()){
-                            Toast.makeText(getActivity(),"กรุณายืนยัน Email", Toast.LENGTH_SHORT).show();
+                String email = ((EditText) getView().findViewById(R.id.login_user_email)).getText().toString();
+                String password = ((EditText) getView().findViewById(R.id.login_user_password)).getText().toString();
+                if (email.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(getActivity(), "กรุณากรอกข้อมูลให้ครบถ้วน", Toast.LENGTH_SHORT).show();
+                } else {
+                    mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                        @Override
+                        public void onSuccess(AuthResult authResult) {
+                            FirebaseUser _user = authResult.getUser();
+                            if (!_user.isEmailVerified()) {
+                                Toast.makeText(getActivity(), "กรุณายืนยัน Email", Toast.LENGTH_SHORT).show();
+                            } else {
+                                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).commit();
+                                Log.d("LOGIN", "GO TO BMI");
+                            }
                         }
-                        else{
-                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new BMIFragment()).commit();
-                            Log.d("LOGIN", "GO TO BMI");
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d("LOGIN", e.getMessage());
+                            Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("LOGIN", e.getMessage());
-                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    });
 
+                }
             }
         });
         }
