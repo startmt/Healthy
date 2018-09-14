@@ -25,6 +25,9 @@ import com.google.firebase.auth.FirebaseUser;
  */
 
 public class LoginFragment extends Fragment {
+    private FirebaseAuth mAuth;
+
+
     @Nullable
     @Override
     public View onCreateView(
@@ -37,6 +40,8 @@ public class LoginFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+
         TextView regisTv = (TextView) getView().findViewById(R.id.text_register);
         regisTv.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view){
@@ -44,8 +49,11 @@ public class LoginFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new RegisterFragment()).commit();
             }
         });
-        final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        mAuth = FirebaseAuth.getInstance();
+
         FirebaseUser muUser = mAuth.getCurrentUser();
+
         if(muUser != null){
             Log.d("LOGIN", muUser.getEmail());
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).commit();

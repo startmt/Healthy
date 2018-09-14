@@ -4,17 +4,28 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.lang.annotation.Documented;
 import java.util.ArrayList;
@@ -39,32 +50,29 @@ public class WeightFragment extends Fragment{
         super.onActivityCreated(savedInstanceState);
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser mUser = mAuth.getCurrentUser();
+        String uId = mUser.getUid();
         FirebaseFirestore mdb =FirebaseFirestore.getInstance();
-        mdb.collection("collection").document("document").set("data").addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        });
-
-        weight.add(new Weight("01 Jan 2018", 63, "UP"));
-        weight.add(new Weight("02 Jan 2018", 64, "UP"));
-        weight.add(new Weight("03 Jan 2018", 62, "DOWN"));
-
-
-        ListView weightList = (ListView) getView().findViewById(R.id.weight_list);
-        WeightAdapter weightAdapter = new WeightAdapter(
+        final ListView weightList = (ListView) getView().findViewById(R.id.weight_list);
+        final WeightAdapter weightAdapter = new WeightAdapter(
                 getActivity(),
                 R.layout.fragment_weigth_item,
                 weight
         );
+        weight.clear();
+        mdb.collection("myfitness").document(uId).collection("weight").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
+                for (QueryDocumentSnapshot doc : queryDocumentSnapshots){
+                    Log.d("WEIGHT", doc.getData().toString());
 
-        weightList.setAdapter(weightAdapter);
+                    weight.add(doc.toObject(Weight.class));
+                }
+
+                weightList.setAdapter(weightAdapter);
+            }
+        });
+
+
 
 
 

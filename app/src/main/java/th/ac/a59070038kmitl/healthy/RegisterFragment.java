@@ -56,6 +56,7 @@ public class RegisterFragment extends Fragment {
                         @Override
                         public void onSuccess(AuthResult authResult) {
                             FirebaseUser _user = authResult.getUser();
+                            mAuth.signOut();
                             sendVerifiedEmail(_user);
                             Log.d("REGISTER", "GOTO BMI");
                             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new LoginFragment()).commit();

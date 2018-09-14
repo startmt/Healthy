@@ -64,6 +64,12 @@ public class MenuFragment extends Fragment{
                             .beginTransaction()
                             .replace(R.id.main_view, new WeightFragment()).addToBackStack(null).commit();
                 }
+                else if(position == 2){
+
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_view, new WeightFormFragment()).addToBackStack(null).commit();
+                }
                 else if(position == 3){
                     mAuth.signOut();
                     getActivity().getSupportFragmentManager()
