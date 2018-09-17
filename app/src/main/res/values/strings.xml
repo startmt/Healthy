@@ -7,6 +7,6 @@
     <string name="re_password">Re-password</string>
     <string name="height">Height (cm)</string>
     <string name="weight">Weight (Kg)</string>
-    <string name="weight_date">วันที่ชั่ง</string>
+    <string name="weight_date">วันที่ชั่ง (กดที่ช่องและกดซ้ำ)</string>
     
 </resources>

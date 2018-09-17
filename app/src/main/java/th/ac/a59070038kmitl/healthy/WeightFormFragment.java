@@ -1,6 +1,7 @@
 package th.ac.a59070038kmitl.healthy;
 
 import android.app.DatePickerDialog;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -72,6 +73,7 @@ public class WeightFormFragment extends Fragment{
                  datePicker.show(getFragmentManager(), "date picker");
              }
          });
+
          Button backButton = (Button) getView().findViewById(R.id.button_back);
          backButton.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -80,9 +82,6 @@ public class WeightFormFragment extends Fragment{
              }
          });
          final Button saveButton = (Button) getView().findViewById(R.id.button_save);
-
-
-
          saveButton.setOnClickListener(new View.OnClickListener() {
 
              @Override
@@ -94,7 +93,6 @@ public class WeightFormFragment extends Fragment{
                  Date dateformat;
 
                  if(date.isEmpty() || weight.isEmpty()) {
-
                      Toast.makeText(getActivity(), "กรุณากรอกข้อมูลให้ครบ", Toast.LENGTH_SHORT);
                  }
 
