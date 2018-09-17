@@ -74,7 +74,7 @@ public class MenuFragment extends Fragment{
                     mAuth.signOut();
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.main_view, new LoginFragment()).addToBackStack(null).commit();
+                            .replace(R.id.main_view, new LoginFragment()).commit();
                 }
             }
         });

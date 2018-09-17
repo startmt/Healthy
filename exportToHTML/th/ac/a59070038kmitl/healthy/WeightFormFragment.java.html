@@ -1,0 +1,117 @@
+<html>
+<head>
+<title>WeightFormFragment.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #606366; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(204,120,50); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(98,151,85); font-style: italic; }
+.s3 { color: rgb(106,135,89); }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+WeightFormFragment.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">package </span><span class="s1">th.ac.a59070038kmitl.healthy</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">android.app.DatePickerDialog</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.support.annotation.NonNull</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.support.annotation.Nullable</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.support.v4.app.DialogFragment</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.support.v4.app.Fragment</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.util.Log</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.LayoutInflater</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.View</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.ViewGroup</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.Button</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.DatePicker</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.EditText</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.Toast</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">com.google.android.gms.tasks.OnFailureListener</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.google.android.gms.tasks.OnSuccessListener</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.google.firebase.auth.FirebaseAuth</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.google.firebase.auth.FirebaseUser</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.google.firebase.firestore.DocumentReference</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">com.google.firebase.firestore.FirebaseFirestore</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">java.text.DateFormat</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.util.Calendar</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">th.ac.a59070038kmitl.healthy.date.DatePickerFragment</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">th.ac.a59070038kmitl.healthy.menu.Weight</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s2">/** 
+ * Created by LAB203_15 on 27/8/2561. 
+ */</span><span class="s1"> 
+ 
+</span><span class="s0">public class </span><span class="s1">WeightFormFragment </span><span class="s0">extends </span><span class="s1">Fragment{ 
+    @Nullable 
+    @Override 
+    </span><span class="s0">public </span><span class="s1">View onCreateView(LayoutInflater inflater</span><span class="s0">, </span><span class="s1">@Nullable ViewGroup container</span><span class="s0">, </span><span class="s1">@Nullable Bundle savedInstanceState) { 
+        </span><span class="s0">return </span><span class="s1">inflater.inflate(R.layout.fragment_weightform</span><span class="s0">, </span><span class="s1">container</span><span class="s0">, false</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+    } 
+ 
+    @Override 
+    </span><span class="s0">public void </span><span class="s1">onActivityCreated(@Nullable Bundle savedInstanceState) { 
+        </span><span class="s0">super</span><span class="s1">.onActivityCreated(savedInstanceState)</span><span class="s0">;</span><span class="s1"> 
+        </span><span class="s0">final </span><span class="s1">FirebaseAuth mAuth = FirebaseAuth.getInstance()</span><span class="s0">;</span><span class="s1"> 
+        </span><span class="s0">final </span><span class="s1">FirebaseUser mUser = mAuth.getCurrentUser()</span><span class="s0">;</span><span class="s1"> 
+        </span><span class="s0">final </span><span class="s1">FirebaseFirestore mdb = FirebaseFirestore.getInstance()</span><span class="s0">;</span><span class="s1"> 
+         </span><span class="s0">final </span><span class="s1">EditText date = getView().findViewById(R.id.weight_date)</span><span class="s0">;</span><span class="s1"> 
+         date.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+             @Override 
+             </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+ 
+                 DialogFragment datePicker = </span><span class="s0">new </span><span class="s1">DatePickerFragment()</span><span class="s0">;</span><span class="s1"> 
+                 datePicker.show(getFragmentManager()</span><span class="s0">, </span><span class="s3">&quot;date picker&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+             } 
+         })</span><span class="s0">;</span><span class="s1"> 
+         Button backButton = (Button) getView().findViewById(R.id.button_back)</span><span class="s0">;</span><span class="s1"> 
+         backButton.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+             @Override 
+             </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view</span><span class="s0">, new </span><span class="s1">WeightFragment()).addToBackStack(</span><span class="s0">null</span><span class="s1">).commit()</span><span class="s0">;</span><span class="s1"> 
+             } 
+         })</span><span class="s0">;</span><span class="s1"> 
+         Button saveButton = (Button) getView().findViewById(R.id.button_save)</span><span class="s0">;</span><span class="s1"> 
+         saveButton.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+             @Override 
+             </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+                 String date = ((TextView) getView().findViewById(R.id.weight_date)).getText().toString()</span><span class="s0">;</span><span class="s1"> 
+                 String weight = ((TextView) getView().findViewById(R.id.weight_number)).getText().toString()</span><span class="s0">;</span><span class="s1"> 
+                 Integer weightint = Integer.parseInt(weight)</span><span class="s0">;</span><span class="s1"> 
+                 String status = </span><span class="s3">&quot; &quot;</span><span class="s0">;</span><span class="s1"> 
+                 Weight weightobj = </span><span class="s0">new </span><span class="s1">Weight(date</span><span class="s0">, </span><span class="s1">weightint</span><span class="s0">,</span><span class="s1">status)</span><span class="s0">;</span><span class="s1"> 
+                 Log.d(</span><span class="s3">&quot;WFORM&quot;</span><span class="s0">, </span><span class="s3">&quot;SAVE_BUTTON&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+                 </span><span class="s0">if</span><span class="s1">(date.isEmpty() || weight.isEmpty()){ 
+                     Toast.makeText(getActivity()</span><span class="s0">, </span><span class="s3">&quot;กรุณากรอกข้อมูลให้ครบ&quot;</span><span class="s0">, </span><span class="s1">Toast.LENGTH_SHORT)</span><span class="s0">;</span><span class="s1"> 
+                 } 
+                 </span><span class="s0">else </span><span class="s1">{ 
+                     mdb.collection(</span><span class="s3">&quot;myfitness&quot;</span><span class="s1">).document(mAuth.getUid()).collection(</span><span class="s3">&quot;weight&quot;</span><span class="s1">).document(date).set(weightobj).addOnSuccessListener(</span><span class="s0">new </span><span class="s1">OnSuccessListener&lt;Void&gt;() { 
+                         @Override 
+                         </span><span class="s0">public void </span><span class="s1">onSuccess(Void aVoid) { 
+                             Log.d(</span><span class="s3">&quot;WFORM&quot;</span><span class="s0">, </span><span class="s3">&quot;SUCCESS&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+                             getActivity().getSupportFragmentManager().beginTransaction().add(R.id.activity_main</span><span class="s0">, new </span><span class="s1">WeightFragment()).addToBackStack(</span><span class="s0">null</span><span class="s1">).commit()</span><span class="s0">;</span><span class="s1"> 
+                         } 
+                     }).addOnFailureListener(</span><span class="s0">new </span><span class="s1">OnFailureListener() { 
+                         @Override 
+                         </span><span class="s0">public void </span><span class="s1">onFailure(@NonNull Exception e) { 
+                             Log.d(</span><span class="s3">&quot;WFORM&quot;</span><span class="s0">, </span><span class="s1">e.getMessage())</span><span class="s0">;</span><span class="s1"> 
+                         } 
+                     })</span><span class="s0">;</span><span class="s1"> 
+                 } 
+             } 
+         })</span><span class="s0">;</span><span class="s1"> 
+    } 
+} 
+</span></pre>
+</body>
+</html>

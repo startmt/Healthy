@@ -63,7 +63,7 @@ public class WeightFragment extends Fragment{
 
 //        weight.clear();
         weightAdapter.clear();
-        mdb.collection("myfitness").document(uId).collection("weight").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        mdb.collection("myfitness").document(uId).collection("weight").orderBy("dateTimestamp", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
 
