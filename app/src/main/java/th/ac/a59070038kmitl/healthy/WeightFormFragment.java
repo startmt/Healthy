@@ -60,8 +60,6 @@ public class WeightFormFragment extends Fragment{
         super.onActivityCreated(savedInstanceState);
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
         final FirebaseFirestore mdb = FirebaseFirestore.getInstance();
-
-
          final EditText date = getView().findViewById(R.id.weight_date);
 
 
@@ -86,17 +84,22 @@ public class WeightFormFragment extends Fragment{
 
              @Override
              public void onClick(View v) {
-                 final String date = ((TextView) getView().findViewById(R.id.weight_date)).getText().toString();
-                 final String weight = ((TextView) getView().findViewById(R.id.weight_number)).getText().toString();
-                 final Integer weightint = Integer.parseInt(weight);
+                 final String date = ((EditText) getView().findViewById(R.id.weight_date)).getText().toString();
+                 final String weight = ((EditText) getView().findViewById(R.id.weight_number)).getText().toString();
                  long dateTime = 0;
                  Date dateformat;
+                 Log.d("WFORM", date);
+                 Log.d("WFORM", weight);
 
-                 if(date.isEmpty() || weight.isEmpty()) {
-                     Toast.makeText(getActivity(), "กรุณากรอกข้อมูลให้ครบ", Toast.LENGTH_SHORT);
+
+                 if(date.isEmpty() || weight.isEmpty() || date.equals("")){
+                     Log.d("WFORM", "DATA NOT COMPLETE.");
+                     Toast.makeText(getActivity(), "กรุณากรอกข้อมูลให้ครบ", Toast.LENGTH_SHORT).show();
                  }
 
+
                  else {
+                     final Integer weightint = Integer.parseInt(weight);
                      try {
                          SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
                          dateformat = sdf.parse(date);
