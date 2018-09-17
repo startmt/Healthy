@@ -21,10 +21,17 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import th.ac.a59070038kmitl.healthy.date.DatePickerFragment;
 import th.ac.a59070038kmitl.healthy.menu.Weight;
@@ -44,9 +51,12 @@ public class WeightFormFragment extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        final FirebaseUser mUser = mAuth.getCurrentUser();
         final FirebaseFirestore mdb = FirebaseFirestore.getInstance();
+
+
          final EditText date = getView().findViewById(R.id.weight_date);
+
+
          date.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
@@ -63,31 +73,65 @@ public class WeightFormFragment extends Fragment{
              }
          });
          Button saveButton = (Button) getView().findViewById(R.id.button_save);
+
+
+
          saveButton.setOnClickListener(new View.OnClickListener() {
+
              @Override
              public void onClick(View v) {
                  String date = ((TextView) getView().findViewById(R.id.weight_date)).getText().toString();
-                 String weight = ((TextView) getView().findViewById(R.id.weight_number)).getText().toString();
+                 final String weight = ((TextView) getView().findViewById(R.id.weight_number)).getText().toString();
                  Integer weightint = Integer.parseInt(weight);
-                 String status = " ";
-                 Weight weightobj = new Weight(date, weightint,status);
+                 String status = "UP";
+                 long dateTime;
+                 Date dateformate;
+
+
                  Log.d("WFORM", "SAVE_BUTTON");
                  if(date.isEmpty() || weight.isEmpty()){
+
                      Toast.makeText(getActivity(), "กรุณากรอกข้อมูลให้ครบ", Toast.LENGTH_SHORT);
                  }
+
                  else {
-                     mdb.collection("myfitness").document(mAuth.getUid()).collection("weight").document(date).set(weightobj).addOnSuccessListener(new OnSuccessListener<Void>() {
-                         @Override
-                         public void onSuccess(Void aVoid) {
-                             Log.d("WFORM", "SUCCESS");
-                             getActivity().getSupportFragmentManager().beginTransaction().add(R.id.activity_main, new WeightFragment()).addToBackStack(null).commit();
-                         }
-                     }).addOnFailureListener(new OnFailureListener() {
-                         @Override
-                         public void onFailure(@NonNull Exception e) {
-                             Log.d("WFORM", e.getMessage());
-                         }
-                     });
+                     try {
+                         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+                         sdf.parse(date);
+                         dateformate = sdf.get2DigitYearStart();
+                         dateTime = dateformate.getTime();
+                         Weight weightobj = new Weight(date, dateTime, weightint,status);
+
+                         mdb.collection("myfitness").document(mAuth.getUid()).collection("weight").whereGreaterThan("dateTimestamp", dateTime).orderBy("dateTimestamp").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                             @Override
+                             public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
+                                 for (QueryDocumentSnapshot doc : queryDocumentSnapshots){
+                                     Log.d("WFORM", doc.getData().toString());
+                                 }
+
+
+                             }
+                         });
+
+
+                         mdb.collection("myfitness").document(mAuth.getUid()).collection("weight").document(date).set(weightobj).addOnSuccessListener(new OnSuccessListener<Void>() {
+                             @Override
+                             public void onSuccess(Void aVoid) {
+                                 Log.d("WFORM", "SUCCESS");
+                                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new WeightFragment()).addToBackStack(null).commit();
+
+                             }
+                         }).addOnFailureListener(new OnFailureListener() {
+                             @Override
+                             public void onFailure(@NonNull Exception e) {
+                                 Log.d("WFORM", e.getMessage());
+                             }
+                         });
+
+                     }catch(Exception e) {
+                         e.printStackTrace();
+                     }
+
                  }
              }
          });

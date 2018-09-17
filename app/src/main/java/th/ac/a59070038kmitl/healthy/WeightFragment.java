@@ -58,23 +58,23 @@ public class WeightFragment extends Fragment{
                 R.layout.fragment_weigth_item,
                 weight
         );
-        weight.clear();
+        weightList.setAdapter(weightAdapter);
+
+
+//        weight.clear();
+        weightAdapter.clear();
         mdb.collection("myfitness").document(uId).collection("weight").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
                 for (QueryDocumentSnapshot doc : queryDocumentSnapshots){
                     Log.d("WEIGHT", doc.getData().toString());
-
                     weight.add(doc.toObject(Weight.class));
+                    weightAdapter.notifyDataSetChanged();
                 }
 
-                weightList.setAdapter(weightAdapter);
+
             }
         });
-
-
-
-
 
         Button addWeightButton = (Button) getView().findViewById(R.id.button_add);
         addWeightButton.setOnClickListener(new View.OnClickListener() {
