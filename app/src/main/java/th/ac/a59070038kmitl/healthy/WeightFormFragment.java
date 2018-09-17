@@ -155,13 +155,10 @@ public class WeightFormFragment extends Fragment{
                                                                                                                                else{
                                                                                                                                    status1 = "DOWN";
                                                                                                                                }
-                                                                                                                               Weight weight1 = new Weight(compareGreaterWeight.getDate(),
-                                                                                                                                       compareGreaterWeight.getDateTimestamp(),
-                                                                                                                                       compareGreaterWeight.getWeight(),
-                                                                                                                                       status1);
+                                                                                                                               compareGreaterWeight.setStatus(status1);
                                                                                                                                mdb.collection("myfitness").document(mAuth.getUid())
                                                                                                                                        .collection("weight").document(compareGreaterWeight.getDate())
-                                                                                                                                       .set(weight1).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                                                                       .set(compareGreaterWeight).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                                                                                    @Override
                                                                                                                                    public void onSuccess(Void aVoid) {
 
@@ -187,22 +184,21 @@ public class WeightFormFragment extends Fragment{
                                      @Override
                                      public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
                                         for (QueryDocumentSnapshot doc : queryDocumentSnapshots){
-                                            if (doc.toObject(Weight.class).getWeight() > weightint){
+                                            Weight compareWeight = doc.toObject(Weight.class);
+                                            if (compareWeight.getWeight() > weightint){
                                                 status1 = "UP";
                                             }
-                                            else if(doc.toObject(Weight.class).getWeight() == weightint){
+                                            else if(compareWeight.getWeight() == weightint){
                                                 status1 = "NO UP AND DOWN";
                                             }
                                             else {
                                                 status1 = "DOWN";
                                             }
 
-                                            Weight weight1 = doc.toObject(Weight.class);
-                                            Weight weight2 = new Weight(weight1.getDate(), weight1.getDateTimestamp(), weight1.getWeight(), status1);
-                                            mdb.collection("myfitness").document(mAuth.getUid()).collection("weight").document(weight2.getDate()).set(weight2).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            compareWeight.setStatus(status1);
+                                            mdb.collection("myfitness").document(mAuth.getUid()).collection("weight").document(compareWeight.getDate()).set(compareWeight).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
-
                                                 }
                                             }).addOnFailureListener(new OnFailureListener() {
                                                 @Override

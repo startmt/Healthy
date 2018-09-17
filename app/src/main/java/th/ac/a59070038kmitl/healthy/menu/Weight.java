@@ -35,4 +35,19 @@ public class Weight {
         return status;
     }
 
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setDateTimestamp(long dateTimestamp) {
+        this.dateTimestamp = dateTimestamp;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
