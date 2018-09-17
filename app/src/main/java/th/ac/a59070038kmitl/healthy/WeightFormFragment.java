@@ -89,11 +89,10 @@ public class WeightFormFragment extends Fragment{
 
 
                  Log.d("WFORM", "SAVE_BUTTON");
-                 if(date.isEmpty() || weight.isEmpty()){
+                 if(date.isEmpty() || weight.isEmpty()) {
 
                      Toast.makeText(getActivity(), "กรุณากรอกข้อมูลให้ครบ", Toast.LENGTH_SHORT);
                  }
-
                  else {
                      try {
                          SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
@@ -102,14 +101,14 @@ public class WeightFormFragment extends Fragment{
                          dateTime = dateformate.getTime();
                          Weight weightobj = new Weight(date, dateTime, weightint,status);
 
-                         mdb.collection("myfitness").document(mAuth.getUid()).collection("weight").whereGreaterThan("dateTimestamp", dateTime).orderBy("dateTimestamp").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                         mdb.collection("myfitness").document(mAuth.getUid()).collection("weight").orderBy("dateTimestamp")
+                                 .whereGreaterThan("dateTimestamp", 3).addSnapshotListener(new EventListener<QuerySnapshot>() {
                              @Override
                              public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
                                  for (QueryDocumentSnapshot doc : queryDocumentSnapshots){
                                      Log.d("WFORM", doc.getData().toString());
+
                                  }
-
-
                              }
                          });
 
