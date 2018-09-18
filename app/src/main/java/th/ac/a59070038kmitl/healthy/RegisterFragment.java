@@ -30,10 +30,7 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
-
         Button registerBtn = (Button) getActivity().findViewById(R.id.button_register);
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override

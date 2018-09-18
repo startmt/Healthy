@@ -1,9 +1,12 @@
 package th.ac.a59070038kmitl.healthy;
 
+import android.annotation.TargetApi;
 import android.icu.text.DecimalFormat;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +28,6 @@ public class BMIFragment extends android.support.v4.app.Fragment{
             @Nullable ViewGroup container,
             @NonNull Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_bmi, container, false);
-
     }
 
     @Override
@@ -33,12 +35,12 @@ public class BMIFragment extends android.support.v4.app.Fragment{
         super.onActivityCreated(savedInstanceState);
         Button calculateBtn = (Button) getView().findViewById(R.id.button_calculate);
         calculateBtn.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.N)
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 String userHeight = ((EditText)getView().findViewById(R.id.bmi_user_height)).getText().toString();
                 String userWeight = ((EditText)getView().findViewById(R.id.bmi_user_weight)).getText().toString();
-
-
                 if(userHeight.isEmpty() || userWeight.isEmpty() || userHeight.equals("0") || userWeight.equals("0")){
                     Log.d("BMI", "FIELD NAME IS EMPTY");
                     Toast.makeText(getActivity(), "กรุณาระบุข้อมูลให้ครบถ้วน", Toast.LENGTH_LONG).show();
@@ -50,10 +52,8 @@ public class BMIFragment extends android.support.v4.app.Fragment{
                     Double.parseDouble(userHeight);
                     Double.parseDouble(userWeight);
                     Double answer = (Double.parseDouble(userWeight) / ((Double.parseDouble(userHeight)/100) * (Double.parseDouble(userHeight)/100)));
-
                     Log.d("BMI", String.valueOf(answer));
                     ((TextView) getView().findViewById(R.id.textView2)).setText(df2.format(answer).toString());
-
                 }
             }
         });

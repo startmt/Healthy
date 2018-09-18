@@ -64,17 +64,12 @@ public class WeightFragment extends Fragment{
         mdb.collection("myfitness").document(uId).collection("weight").orderBy("dateTimestamp", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
-
                 weightAdapter.clear();
-
                 for (QueryDocumentSnapshot doc : queryDocumentSnapshots){
                     Log.d("WEIGHT", doc.getData().toString());
                     weight.add(doc.toObject(Weight.class));
-
                     Log.d("ADAPTER", " from firestore = " + doc.toObject(Weight.class).getDate());
-
                 }
-
                 weightAdapter.notifyDataSetChanged();
             }
         });

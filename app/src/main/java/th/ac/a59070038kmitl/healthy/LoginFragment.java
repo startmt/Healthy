@@ -59,7 +59,6 @@ public class LoginFragment extends Fragment {
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).commit();
             Log.d("LOGIN", "GO TO BMI");
         }
-
         Button loginBtn = (Button) getView().findViewById(R.id.button_login);
         loginBtn.setOnClickListener(new View.OnClickListener(){
             @Override

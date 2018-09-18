@@ -36,7 +36,6 @@ public class WeightAdapter extends ArrayAdapter<Weight>{
                 R.layout.fragment_weigth_item,
                 parent,
                 false);
-//        Collections.reverse(weights);
         TextView date = (TextView) weightItem.findViewById(R.id.weight_item_date);
         TextView weight = (TextView) weightItem.findViewById(R.id.weight_item_weight);
         TextView status = (TextView) weightItem.findViewById(R.id.weight_item_status);
