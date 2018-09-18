@@ -51,7 +51,7 @@ public class WeightFragment extends Fragment{
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser mUser = mAuth.getCurrentUser();
         String uId = mUser.getUid();
-        FirebaseFirestore mdb =FirebaseFirestore.getInstance();
+        FirebaseFirestore mdb = FirebaseFirestore.getInstance();
         final ListView weightList = (ListView) getView().findViewById(R.id.weight_list);
         final WeightAdapter weightAdapter = new WeightAdapter(
                 getActivity(),
@@ -60,8 +60,6 @@ public class WeightFragment extends Fragment{
         );
         weightList.setAdapter(weightAdapter);
 
-
-//        weight.clear();
         weightAdapter.clear();
         mdb.collection("myfitness").document(uId).collection("weight").orderBy("dateTimestamp", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
