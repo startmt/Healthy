@@ -1,6 +1,7 @@
 package th.ac.a59070038kmitl.healthy;
 
 import android.app.DatePickerDialog;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,16 +22,18 @@ public class MainActivity extends AppCompatActivity  implements DatePickerDialog
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_main);
+        SQLiteDatabase myDB = openOrCreateDatabase("my.db", MODE_PRIVATE,null);
+        myDB.execSQL("CREATE TABLE IF NOT EXISTS sleep(_id INTEGER PRIMARY KEY AUTOINCREMENT, date VARCHAR(200), sleeptime VARCHAR(200), waketime VARCHAR(200))");
+
         if(savedInstanceState == null){
             LoginFragment fragment = new LoginFragment();
-
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace( R.id.main_view, fragment )
                     .commit();
         }
     }
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
