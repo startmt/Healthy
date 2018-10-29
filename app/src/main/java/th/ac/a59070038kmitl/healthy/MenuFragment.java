@@ -28,6 +28,7 @@ public class MenuFragment extends Fragment{
         menu.add("BMI");
         menu.add("Weight");
         menu.add("Setup");
+        menu.add("Sleep-time");
         menu.add("Logout");
     }
 
@@ -71,6 +72,12 @@ public class MenuFragment extends Fragment{
                             .replace(R.id.main_view, new WeightFormFragment()).addToBackStack(null).commit();
                 }
                 else if(position == 3){
+                    mAuth.signOut();
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_view, new SleepFragment()).commit();
+                }
+                else if(position == 4){
                     mAuth.signOut();
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()

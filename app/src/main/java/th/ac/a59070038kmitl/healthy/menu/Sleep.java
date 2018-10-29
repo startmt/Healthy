@@ -3,18 +3,18 @@ package th.ac.a59070038kmitl.healthy.menu;
 public class Sleep {
     private String date;
     private String sleeptime;
-    private int duration;
+    private String duration;
 
     public Sleep(){
 
     }
-    public Sleep (String date, String sleeptime, int duration){
+    public Sleep (String date, String sleeptime, String duration){
         this.date = date;
         this.sleeptime = sleeptime;
         this.duration = duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
@@ -26,7 +26,7 @@ public class Sleep {
         return sleeptime;
     }
 
-    public int getDuration() {
+    public String getDuration() {
         return duration;
     }
 }

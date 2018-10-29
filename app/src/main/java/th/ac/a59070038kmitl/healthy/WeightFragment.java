@@ -1,7 +1,6 @@
 package th.ac.a59070038kmitl.healthy;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,15 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -27,7 +19,6 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.lang.annotation.Documented;
 import java.util.ArrayList;
 
 import th.ac.a59070038kmitl.healthy.menu.Weight;
@@ -52,7 +43,7 @@ public class WeightFragment extends Fragment{
         FirebaseUser mUser = mAuth.getCurrentUser();
         String uId = mUser.getUid();
         FirebaseFirestore mdb = FirebaseFirestore.getInstance();
-        final ListView weightList = (ListView) getView().findViewById(R.id.weight_list);
+        final ListView weightList = getView().findViewById(R.id.weight_list);
         final WeightAdapter weightAdapter = new WeightAdapter(
                 getActivity(),
                 R.layout.fragment_weigth_item,

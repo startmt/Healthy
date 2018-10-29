@@ -11,7 +11,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import th.ac.a59070038kmitl.healthy.AddData;
+import th.ac.a59070038kmitl.healthy.data.AddData;
 import th.ac.a59070038kmitl.healthy.menu.Weight;
 
 public class LessCompare {
@@ -26,16 +26,17 @@ public class LessCompare {
                     .whereLessThan("dateTimestamp", finalDateTime).addSnapshotListener(new EventListener<QuerySnapshot>() {
                 @Override
                 public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
-
-                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
-                        Weight compareLessWeight = doc.toObject(Weight.class);
-                        Log.d("WFORM", doc.toObject(Weight.class).getDate());
-                        if (compareLessWeight.getWeight() < weightcurrent) {
-                            status = "UP";
-                        } else if (compareLessWeight.getWeight() == weightcurrent) {
-                            status = "NO UP AND DOWN";
-                        } else {
-                            status = "DOWN";
+                    if(!queryDocumentSnapshots.isEmpty()) {
+                        for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                            Weight compareLessWeight = doc.toObject(Weight.class);
+                            Log.d("WFORM", doc.toObject(Weight.class).getDate());
+                            if (compareLessWeight.getWeight() < weightcurrent) {
+                                status = "UP";
+                            } else if (compareLessWeight.getWeight() == weightcurrent) {
+                                status = "NO UP AND DOWN";
+                            } else {
+                                status = "DOWN";
+                            }
                         }
                     }
                     Weight currentWeight = new Weight(date,finalDateTime,weightcurrent,status);

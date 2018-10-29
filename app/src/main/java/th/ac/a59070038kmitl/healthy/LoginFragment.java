@@ -53,7 +53,6 @@ public class LoginFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
         FirebaseUser muUser = mAuth.getCurrentUser();
-
         if(muUser != null){
             Log.d("LOGIN", muUser.getEmail());
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).commit();

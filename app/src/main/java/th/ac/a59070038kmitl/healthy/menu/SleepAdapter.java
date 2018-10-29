@@ -37,7 +37,7 @@ public class SleepAdapter extends ArrayAdapter<Sleep> {
         Sleep row = sleeps.get(position);
         date.setText(row.getDate());
         slepttime.setText(row.getSleeptime());
-        duration.setText(row.getDuration());
+        duration.setText(String.valueOf(row.getDuration()));
 
         return sleepItem;
     }

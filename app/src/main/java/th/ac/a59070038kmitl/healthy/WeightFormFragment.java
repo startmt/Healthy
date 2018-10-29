@@ -43,7 +43,7 @@ public class WeightFormFragment extends Fragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-         final EditText date = getView().findViewById(R.id.weight_date);
+         final EditText date = getView().findViewById(R.id.date);
 
 
          date.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +69,7 @@ public class WeightFormFragment extends Fragment{
 
              @Override
              public void onClick(View v) {
-                 final String date = ((EditText) getView().findViewById(R.id.weight_date)).getText().toString();
+                 final String date = ((EditText) getView().findViewById(R.id.date)).getText().toString();
                  final String weight = ((EditText) getView().findViewById(R.id.weight_number)).getText().toString();
 
 

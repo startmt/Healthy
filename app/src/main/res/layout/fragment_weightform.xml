@@ -18,7 +18,7 @@
             <EditText
                 android:drawableLeft="@drawable/ic_action_user"
                 android:inputType="date"
-                android:id="@+id/weight_date"
+                android:id="@+id/date"
                 android:hint="@string/weight_date"
                 android:layout_width="match_parent"
                 android:layout_marginTop="15dp"

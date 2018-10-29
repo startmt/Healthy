@@ -11,10 +11,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
 import th.ac.a59070038kmitl.healthy.menu.Sleep;
+import th.ac.a59070038kmitl.healthy.menu.SleepAdapter;
 
 public class SleepFragment extends Fragment {
     @Nullable
@@ -27,17 +30,36 @@ public class SleepFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         SQLiteDatabase db = getActivity().openOrCreateDatabase("my.db", Context.MODE_PRIVATE, null);
-        Cursor myCur = db.rawQuery("select * from sleep", null);
+        Cursor myCur = db.rawQuery("select * from sleephisw", null);
         ArrayList<Sleep> sleeps = new ArrayList<>();
+        final ListView sleepList = getView().findViewById(R.id.sleep_list);
+        final SleepAdapter sleepAdapter = new SleepAdapter(
+                getActivity(),
+                R.layout.fragment_sleep_item,
+                sleeps
+        );
+        sleepList.setAdapter(sleepAdapter);
+        sleepAdapter.clear();
         while (myCur.moveToNext()){
-            String date = myCur.getString(0);
-            String sleeptime = myCur.getString(1);
-            String waketime = myCur.getString(2);
+
+            String date = myCur.getString(1);
+            String sleeptime = myCur.getString(2);
+            String waketime = myCur.getString(3);
             String slepttime = sleeptime + " - " + waketime;
-            int duration = (int) 5.30;
+            String duration = myCur.getString(4);
             sleeps.add(new Sleep(date, slepttime, duration));
 
         }
         myCur.close();
+        sleepAdapter.notifyDataSetChanged();
+        Button addslptime = getActivity().findViewById(R.id.button_add);
+        addslptime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_view, new SleepFormFragment()).commit();
+            }
+        });
     }
 }
