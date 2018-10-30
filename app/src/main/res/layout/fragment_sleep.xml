@@ -11,6 +11,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <Button
+                android:text="Back"
+                android:id="@+id/button_back"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <Button
                 android:text="Add Sleep TIME"
                 android:id="@+id/button_add"
                 android:layout_width="match_parent"

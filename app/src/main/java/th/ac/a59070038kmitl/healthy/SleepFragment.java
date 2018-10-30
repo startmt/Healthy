@@ -52,6 +52,13 @@ public class SleepFragment extends Fragment {
         }
         myCur.close();
         sleepAdapter.notifyDataSetChanged();
+        Button backBtn = getActivity().findViewById(R.id.button_back);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new MenuFragment()).commit();
+            }
+        });
         Button addslptime = getActivity().findViewById(R.id.button_add);
         addslptime.setOnClickListener(new View.OnClickListener() {
             @Override
