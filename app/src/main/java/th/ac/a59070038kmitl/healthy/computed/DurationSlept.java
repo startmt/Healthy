@@ -24,8 +24,6 @@ public class DurationSlept {
         if (hourandmin1 > hourandmin2){
             hour = String.valueOf(Math.round((1440 - (hourandmin1 - hourandmin2)) / 60));
             minute = String.valueOf(Math.round((1440 - (hourandmin1 - hourandmin2))) % 60);
-            Log.d("DURATION", hour);
-            Log.d("DURATION", minute);
             this.durationtime = hour + "." + minute;
         }
         else {

@@ -45,7 +45,9 @@ public class MenuFragment extends Fragment{
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser muUser = mAuth.getCurrentUser();
         Log.d("MENU", muUser.getEmail());
-        ListView menulist = (ListView) getView().findViewById(R.id.menu_list);
+        ListView menulist =  getView().findViewById(R.id.menu_list);
+
+
         menulist.setAdapter(menuAdapter);
         menulist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -72,10 +74,9 @@ public class MenuFragment extends Fragment{
                             .replace(R.id.main_view, new WeightFormFragment()).addToBackStack(null).commit();
                 }
                 else if(position == 3){
-                    mAuth.signOut();
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.main_view, new SleepFragment()).commit();
+                            .replace(R.id.main_view, new SleepFragment()).addToBackStack(null).commit();
                 }
                 else if(position == 4){
                     mAuth.signOut();

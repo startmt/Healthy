@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity  implements DatePickerDialog
         //setContentView(R.layout.activity_main);
         setContentView(R.layout.activity_main);
         SQLiteDatabase myDB = openOrCreateDatabase("my.db", MODE_PRIVATE,null);
-        myDB.execSQL("CREATE TABLE IF NOT EXISTS sleephis(_id INTEGER PRIMARY KEY AUTOINCREMENT, date VARCHAR(200), sleeptime VARCHAR(200), waketime VARCHAR(200), duration VARCHAR(200))");
+        myDB.execSQL("CREATE TABLE IF NOT EXISTS sleeptime(_id INTEGER PRIMARY KEY AUTOINCREMENT, date VARCHAR(200), sleeptime VARCHAR(200), waketime VARCHAR(200), duration VARCHAR(200))");
 
         if(savedInstanceState == null){
             LoginFragment fragment = new LoginFragment();
