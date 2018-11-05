@@ -46,8 +46,9 @@ public class SleepFormFragment extends Fragment {
             TextDate.setText(date);
             Log.d("SLEEPFORM", date);
             SQLiteDatabase db = getActivity().openOrCreateDatabase("my.db", Context.MODE_PRIVATE, null);
-            Cursor myCur = db.rawQuery("select date from sleeptime where date = " + date, null);
+            Cursor myCur = db.rawQuery("select * from sleeptime where date = '" + date + "'", null);
             while (myCur.moveToNext()){
+                Log.d("SLEEPFORM", "GET DATA FROM BUNDLE");
                 idUpdate = myCur.getInt(0);
                 TextSleep.setText(myCur.getString(2));
                 TextWake.setText(myCur.getString(3));
@@ -107,6 +108,7 @@ public class SleepFormFragment extends Fragment {
 
 
     public void setDatabase(int state, ContentValues row1){
+        Log.d("SLEEPFORM", "DO INSERT");
         SQLiteDatabase db = getActivity().openOrCreateDatabase("my.db", Context.MODE_PRIVATE, null);
         db.insert("sleeptime", null, row1);
         db.close();
@@ -115,6 +117,9 @@ public class SleepFormFragment extends Fragment {
                 .replace(R.id.main_view, new SleepFragment()).commit();
     }
     public void setDatabase(int state, ContentValues row1, int id){
+        Log.d("SLEEPFORM", "DO UPDATE");
+        Log.d("SLEEPFORM", "ID = " + String.valueOf(id));
+        Log.d("SLEEPFORM", "Data = " + row1);
         SQLiteDatabase db = getActivity().openOrCreateDatabase("my.db", Context.MODE_PRIVATE, null);
         db.update("sleeptime", row1, "_id =" + id, null);
         db.close();
