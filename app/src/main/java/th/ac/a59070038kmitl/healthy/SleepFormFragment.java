@@ -44,8 +44,9 @@ public class SleepFormFragment extends Fragment {
             state = 1;
             String date = bundle.getString("date");
             TextDate.setText(date);
+            Log.d("SLEEPFORM", date);
             SQLiteDatabase db = getActivity().openOrCreateDatabase("my.db", Context.MODE_PRIVATE, null);
-            Cursor myCur = db.rawQuery("select" + date + "from sleeptime", null);
+            Cursor myCur = db.rawQuery("select date from sleeptime where date = " + date, null);
             while (myCur.moveToNext()){
                 idUpdate = myCur.getInt(0);
                 TextSleep.setText(myCur.getString(2));

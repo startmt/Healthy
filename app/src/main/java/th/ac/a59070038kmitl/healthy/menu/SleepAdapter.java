@@ -38,8 +38,6 @@ public class SleepAdapter extends ArrayAdapter<Sleep> {
         date.setText(row.getDate());
         slepttime.setText(row.getSleeptime());
         duration.setText(String.valueOf(row.getDuration()));
-        sleepItem.setFocusable(true);
-        sleepItem.setFocusableInTouchMode(true);
         return sleepItem;
     }
 }
