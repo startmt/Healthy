@@ -28,17 +28,39 @@ public class SleepFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_sleep, container, false);
     }
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-
+        showList();
+        Button backBtn = getActivity().findViewById(R.id.button_back);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_view, new MenuFragment()).commit();
+            }
+        });
+        Button addslptime = getActivity().findViewById(R.id.button_add);
+        addslptime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Bundle arg = new Bundle();
+//                Fragment sleepFormFragment = new SleepFormFragment();
+//                arg.putString("data", "01-09-2018");
+//                sleepFormFragment.setArguments(arg);  TDD send arg
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_view, new SleepFormFragment()).commit();
+            }
+        });
+    }
+    public void showList(){
         SQLiteDatabase db = getActivity().openOrCreateDatabase("my.db", Context.MODE_PRIVATE, null);
         Cursor myCur = db.rawQuery("select * from sleeptime", null);
-         ArrayList<Sleep> sleeps = new ArrayList<>();
-         ListView sleepList = getView().findViewById(R.id.sleep_list);
-         SleepAdapter sleepAdapter = new SleepAdapter(
+        ArrayList<Sleep> sleeps = new ArrayList<>();
+        ListView sleepList = getView().findViewById(R.id.sleep_list);
+        SleepAdapter sleepAdapter = new SleepAdapter(
                 getActivity(),
                 R.layout.fragment_sleep_item,
                 sleeps
@@ -58,8 +80,6 @@ public class SleepFragment extends Fragment {
         myCur.close();
         db.close();
         sleepAdapter.notifyDataSetChanged();
-
-
         sleepList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -79,21 +99,5 @@ public class SleepFragment extends Fragment {
             }
         });
 
-
-
-
-        Button addslptime = getActivity().findViewById(R.id.button_add);
-        addslptime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Bundle arg = new Bundle();
-//                Fragment sleepFormFragment = new SleepFormFragment();
-//                arg.putString("data", "01-09-2018");
-//                sleepFormFragment.setArguments(arg);  TDD send arg
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.main_view, new SleepFormFragment()).commit();
-            }
-        });
     }
 }
