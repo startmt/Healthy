@@ -1,4 +1,4 @@
-package th.ac.a59070038kmitl.healthy.post;
+package th.ac.a59070038kmitl.healthy.comment;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -13,35 +13,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 import th.ac.a59070038kmitl.healthy.R;
-import th.ac.a59070038kmitl.healthy.menu.Weight;
+import th.ac.a59070038kmitl.healthy.post.Post;
 
-public class PostListAdapter extends ArrayAdapter {
+public class CommentAdapter extends ArrayAdapter<Comment> {
     Context context;
-    ArrayList<Post> posts = new ArrayList<Post>();
-    public PostListAdapter(@NonNull Context context,
-                         int resource,
-                         @NonNull List<Post> objects) {
+    ArrayList<Comment> comment = new ArrayList<Comment>();
+    public CommentAdapter(@NonNull Context context,
+                           int resource,
+                           @NonNull List<Comment> objects) {
         super(context, resource, objects);
         this.context = context;
-        this.posts = (ArrayList<Post>) objects;
+        this.comment = (ArrayList<Comment>) objects;
     }
     @NonNull
     public View getView(int position, @NonNull View convertView,
                         @NonNull ViewGroup parent){
         View weightItem = LayoutInflater.from(context).inflate(
-                R.layout.post_list,
+                R.layout.comment_list,
                 parent,
                 false);
         Log.d("POSTFRAGMENT", "OK");
+        TextView postId = (TextView) weightItem.findViewById(R.id.post_postid);
         TextView id = (TextView) weightItem.findViewById(R.id.post_id);
-        TextView title = (TextView) weightItem.findViewById(R.id.post_title);
         TextView body = (TextView) weightItem.findViewById(R.id.post_body);
-        Post row = posts.get(position);
+        TextView name = (TextView) weightItem.findViewById(R.id.post_name);
+        TextView email = (TextView) weightItem.findViewById(R.id.post_email);
+        Comment row = comment.get(position);
 
+        postId.setText(String.valueOf(row.getPostId()));
         id.setText(String.valueOf(row.getId()));
-        title.setText(String.valueOf(row.getTitle()));
-        body.setText(row.getBody());
+        body.setText(String.valueOf(row.getBody()));
+        name.setText("Name : " + row.getName());
+        email.setText("Email : " + row.getEmail());
         return weightItem;
     }
-
 }
