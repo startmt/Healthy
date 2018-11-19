@@ -29,6 +29,7 @@ public class MenuFragment extends Fragment{
         menu.add("Weight");
         menu.add("Setup");
         menu.add("Sleep-time");
+        menu.add("Post");
         menu.add("Logout");
     }
 
@@ -79,6 +80,11 @@ public class MenuFragment extends Fragment{
                             .replace(R.id.main_view, new SleepFragment()).addToBackStack(null).commit();
                 }
                 else if(position == 4){
+                    getActivity().getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_view, new SleepFragment()).addToBackStack(null).commit();
+                }
+                else if(position == 5){
                     mAuth.signOut();
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()
