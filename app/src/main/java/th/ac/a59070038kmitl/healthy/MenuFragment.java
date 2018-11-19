@@ -82,7 +82,7 @@ public class MenuFragment extends Fragment{
                 else if(position == 4){
                     getActivity().getSupportFragmentManager()
                             .beginTransaction()
-                            .replace(R.id.main_view, new SleepFragment()).addToBackStack(null).commit();
+                            .replace(R.id.main_view, new PostFragment()).addToBackStack(null).commit();
                 }
                 else if(position == 5){
                     mAuth.signOut();
